@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Eligibility Checker</title>
+</head>
+<body>
+    <h1>Check Eligibility</h1>
+    <label for="studentID">Enter Student ID:</label>
+    <input type="text" id="studentID" placeholder="Student ID">
+    <button onclick="checkScholarship()">Check Scholarship</button>
+    <button onclick="checkExam()">Check Exam Permission</button>
+    <p id="output"></p>
+
+    <script>
+        function checkScholarship() {
+            const id = document.getElementById('studentID').value;
+            fetch(`http://localhost:8080/scholarship?id=${id}`)
+                .then(response => response.json())
+                .then(data => document.getElementById('output').innerText = data.message);
+        }
+
+        function checkExam() {
+            const id = document.getElementById('studentID').value;
+            fetch(`http://localhost:8080/exam_permission?id=${id}`)
+                .then(response => response.json())
+                .then(data => document.getElementById('output').innerText = data.message);
+        }
+    </script>
+</body>
+</html>
